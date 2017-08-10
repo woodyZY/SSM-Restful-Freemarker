@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>addUser.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript" src="${request.contextPath}/js/jquery-3.0.0.js"></script>
+  </head>
+  
+  <body>
+    <form>
+         <table>
+             <tr>
+                <td>用户编号</td>
+                <td><input id="userid" type="text" name="userid" id="userid" placeholder="请输入用户编号" /></td>
+             </tr>
+             <tr>
+                <td>用户名</td>
+                <td><input id="username" type="text" name="username" id="username" placeholder="请输入用户名" /></td>
+             </tr>
+             <tr>
+                <td colspan="2"><input type="submit" value="提交" onclick="addUser();return false;" /></td>
+             </tr>
+         </table>
+    </form>
+    <br><br>
+    <a href="javascript:void(0);" onclick="goBack()">返回上一页</a>
+    <script>
+          var isLocked =  false;
+          function goBack(){
+            window.history.go(-1);
+          }
+           function addUser(){
+		        if(!isLocked){
+		           isLocked = true;
+		            var userid = $("#userid").val();
+		        var username = $("#username").val();
+		        $.ajax({
+		          url:"${request.contextPath}/user/"+userid,
+		          type:"post",
+		          data:{"userid":userid,"username":username},
+		          success:function(data){
+		            if(data.success=="success")
+		            isLocked = false;
+		            window.location.href = "${request.contextPath}"+"/user";
+		          },
+		          error:function(XMLHttpRequest,textStatus,errorThrown){
+		               console.log(XMLHttpRequest.readyState);
+		               console.log(textStatus);
+		               console.log(errorThrown);
+		               isLocked = false;
+		            }
+		        })
+		        }
+		        else{
+		          return false;
+		        }
+          }
+    </script>
+  </body>
+</html>
