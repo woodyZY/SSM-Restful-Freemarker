@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/mvc   
+    http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+    
+    <!-- don't handle the static resource -->
+    <mvc:default-servlet-handler />
+    <mvc:annotation-driven />
+     
+     <context:annotation-config/>   
+    <context:component-scan base-package="com.ssmfr.test.controller" >   
+    </context:component-scan>    
+        
+     <!-- 设置freeMarker的配置文件路径 -->
+	<bean id="freemarkerConfiguration"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="/WEB-INF/classes/freemarker.properties" />
+	</bean>
+
+        <bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="freemarkerSettings" ref="freemarkerConfiguration" /> 
+		<property name="templateLoaderPath">
+		    <value>/WEB-INF/freemarkerTemplate/</value>
+		</property>
+		<!-- <property name="freemarkerVariables">设置一些常用的全局变量
+		    <map>
+			<entry key="xml_escape" value-ref="fmXmlEscape" />
+			<entry key="webRoot" value="/shop"></entry>  
+                        <entry key="jsRoot" value="/shop/js"></entry>   
+		    </map>
+		</property> -->
+	</bean>
+ 
+  <!-- 配置freeMarker视图解析器 -->
+	<bean id="freemarkerViewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" 
+			/>
+		<!-- <property name="viewNames" value="/freemaker/*.ftl,/freemaker/*.html" /> -->
+		<property name="contentType" value="text/html; charset=utf-8" />
+		<property name="cache" value="true" />
+		<property name="suffix" value=".html" />
+	<!-- 	<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="exposeSpringMacroHelpers" value="true" /> -->
+		<property  name="requestContextAttribute"  value="request" />
+		<property name="order" value="1" />
+	</bean>
+
+</beans>

@@ -1,3 +1,6 @@
+# jdbc-mysql username Password
+dataSource.properties
+
 *.class
 
 # BlueJ files

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="SpringMvc.Mybatis.Freemarker.Restful"
+  id="myeclipse.1502260023943"
+  context-root="/SpringMvc.Mybatis.Freemarker.Restful"
+  j2ee-spec="1.7"
+  archive="SpringMvc.Mybatis.Freemarker.Restful.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
