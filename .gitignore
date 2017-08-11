@@ -1,3 +1,6 @@
+#.gitattrbutes .gitignore 
+.gitattrbutes .gitignore
+
 # jdbc-mysql username Password
 dataSource.properties
 
